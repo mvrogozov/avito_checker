@@ -26,6 +26,7 @@ class AdvertCounterAddView(APIView):
         request.data['search_phrase'] = (
             request.data.get('search_phrase').lower()
         )
+        request.data['counter'] = 100500
         serializer = AdvertsCounterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

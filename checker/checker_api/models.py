@@ -16,13 +16,16 @@ class AdvertsCounter(models.Model):
         blank=True
     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=('search_phrase', 'region'),
-                name='unique_pair'
-            )
-        ]
+    created = models.DateTimeField(
+        'Дата создания',
+        auto_now_add=True,
+        help_text='Дата создания запроса'
+    )
+
+    counter = models.IntegerField(
+        'Количество объявлений',
+        help_text='Количество объявлений'
+    )
 
     def __str__(self):
         return f'{self.search_phrase[:10]} - {self.region}'
