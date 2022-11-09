@@ -134,3 +134,4 @@ dmypy.json
 # request.http
 
 .vscode/
+*.http
