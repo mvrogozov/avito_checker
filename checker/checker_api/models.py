@@ -16,10 +16,12 @@ class AdvertsCounter(models.Model):
         blank=True
     )
 
-    created = models.DateTimeField(
-        'Дата создания',
-        auto_now_add=True,
-        help_text='Дата создания запроса'
+    check_date = models.ForeignKey(
+        'CheckDate',
+        verbose_name='Дата проверки',
+        related_name='advert_counter',
+        null=True,
+        on_delete=models.SET_NULL
     )
 
     counter = models.IntegerField(
@@ -27,5 +29,22 @@ class AdvertsCounter(models.Model):
         help_text='Количество объявлений'
     )
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=('search_phrase', 'region'),
+                name='unique_pair'
+            )
+        ]
+
     def __str__(self):
         return f'{self.search_phrase[:10]} - {self.region}'
+
+
+class CheckDate(models.Model):
+    checked_date = models.DateTimeField(
+        'Дата проверки'
+    )
+
+    def __str__(self):
+        return f'{self.checked_date}'

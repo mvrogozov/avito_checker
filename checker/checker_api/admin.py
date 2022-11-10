@@ -1,6 +1,6 @@
 from django.contrib import admin
 from typing import Callable, Sequence, Union
-from .models import AdvertsCounter
+from .models import AdvertsCounter, CheckDate
 
 
 class AdvertCounterAdmin(admin.ModelAdmin):
@@ -9,8 +9,12 @@ class AdvertCounterAdmin(admin.ModelAdmin):
         'search_phrase',
         'region',
         'counter',
-        'created'
     )
 
 
+class CheckDateAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(AdvertsCounter, AdvertCounterAdmin)
+admin.site.register(CheckDate, CheckDateAdmin)

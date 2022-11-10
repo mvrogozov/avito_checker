@@ -13,3 +13,10 @@ class AdvertsCounterSerializer(serializers.ModelSerializer):
             'region',
             'counter'
         )
+        validators = [
+            serializers.UniqueTogetherValidator(
+                queryset=model.objects.all(),
+                fields=('search_phrase', 'region'),
+                message=('Такой запрос уже существует.')
+            )
+        ]
