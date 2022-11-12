@@ -16,8 +16,8 @@ def count_adverts(url: str, region: str, phrase: str) -> int:
     Parse page.
     """
     chrome_options = Options()
-    #chrome_options.add_argument('--no-sandbox')
-    #chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--headless')
 
     try:
         driver = webdriver.Chrome(options=chrome_options)
@@ -32,7 +32,7 @@ def count_adverts(url: str, region: str, phrase: str) -> int:
         driver.get('{}/{}?q={}'.format(url, region, phrase))
     except InvalidArgumentException:
         driver.close()
-        return []
+        return ''
 
     html = driver.page_source
     soup = bs(html, 'html.parser')
@@ -40,7 +40,9 @@ def count_adverts(url: str, region: str, phrase: str) -> int:
         'span',
         attrs={'data-marker': 'page-title/count'}
     )
-    return adverts_counter[0].text
+    if adverts_counter:
+        return adverts_counter[0].text
+    return 0
 
 
 def main():

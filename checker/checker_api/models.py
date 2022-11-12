@@ -24,11 +24,6 @@ class AdvertsCounter(models.Model):
         on_delete=models.SET_NULL
     )
 
-    counter = models.IntegerField(
-        'Количество объявлений',
-        help_text='Количество объявлений'
-    )
-
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -44,6 +39,11 @@ class AdvertsCounter(models.Model):
 class CheckDate(models.Model):
     checked_date = models.DateTimeField(
         'Дата проверки'
+    )
+
+    counter = models.IntegerField(
+        'Количество объявлений',
+        help_text='Количество объявлений'
     )
 
     def __str__(self):

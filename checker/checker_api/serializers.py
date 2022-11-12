@@ -1,9 +1,11 @@
-from .models import AdvertsCounter
+from .models import AdvertsCounter, CheckDate
 from rest_framework import serializers
 
 
 class AdvertsCounterSerializer(serializers.ModelSerializer):
-    counter = serializers.IntegerField()
+    check_date = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        )
 
     class Meta:
         model = AdvertsCounter
@@ -11,7 +13,7 @@ class AdvertsCounterSerializer(serializers.ModelSerializer):
             'id',
             'search_phrase',
             'region',
-            'counter'
+            'check_date'
         )
         validators = [
             serializers.UniqueTogetherValidator(
@@ -20,3 +22,9 @@ class AdvertsCounterSerializer(serializers.ModelSerializer):
                 message=('Такой запрос уже существует.')
             )
         ]
+
+
+class CheckDateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CheckDate
+        fields = ('checked_date', 'counter')

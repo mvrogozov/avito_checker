@@ -8,7 +8,6 @@ class AdvertCounterAdmin(admin.ModelAdmin):
         'id',
         'search_phrase',
         'region',
-        'counter',
     )
 
 
